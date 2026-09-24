@@ -49,3 +49,24 @@
 .nav-links a:hover {
   color: var(--color-accent);
 }
+
+@media (max-width: 768px) {
+  .navbar-inner {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
+  }
+}
