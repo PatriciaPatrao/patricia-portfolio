@@ -1,0 +1,48 @@
+<section class="contact" id="contact">
+    <div class="contact-content">
+  
+      <div class="section-heading">
+        <p class="eyebrow">CONTACT</p>
+  
+        <h2>
+          Let's build something useful.
+        </h2>
+      </div>
+  
+      <div class="contact-body">
+  
+        <p class="description">
+          I am open to opportunities in software development,
+          particularly across frontend, full stack and
+          data-driven applications.
+        </p>
+  
+        <div class="contact-links">
+  
+          @for (contact of contactLinks; track contact.label) {
+            <a
+              class="contact-link"
+              [href]="contact.url"
+              [target]="contact.external ? '_blank' : null"
+              [rel]="contact.external ? 'noopener noreferrer' : null"
+            >
+              <span class="contact-label">
+                {{ contact.label }}
+              </span>
+  
+              <span class="contact-value">
+                {{ contact.value }}
+              </span>
+  
+              <span class="contact-arrow">
+                →
+              </span>
+            </a>
+          }
+  
+        </div>
+  
+      </div>
+  
+    </div>
+</section>

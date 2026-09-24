@@ -1,0 +1,118 @@
+.contact {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+  }
+  
+  .contact-content {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) minmax(320px, 1.2fr);
+    gap: var(--space-3xl);
+  
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .section-heading {
+    max-width: 500px;
+  }
+  
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+  
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+  
+  h2 {
+    margin: 0;
+  
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  
+  .contact-body {
+    max-width: 650px;
+  }
+  
+  .description {
+    margin: 0 0 var(--space-xl);
+  
+    color: var(--color-text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+  
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .contact-link {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    align-items: center;
+    gap: var(--space-lg);
+  
+    padding: var(--space-lg) 0;
+  
+    border-bottom: 1px solid var(--color-border);
+  
+    color: var(--color-text);
+  }
+  
+  .contact-label {
+    color: var(--color-accent);
+  
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  
+  .contact-value {
+    color: var(--color-text-secondary);
+  
+    font-size: 0.95rem;
+  
+    transition: color 0.2s ease;
+  }
+  
+  .contact-arrow {
+    color: var(--color-text-secondary);
+  
+    font-size: 1.1rem;
+  
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+  
+  .contact-link:hover .contact-value,
+  .contact-link:hover .contact-arrow {
+    color: var(--color-accent);
+  }
+  
+  .contact-link:hover .contact-arrow {
+    transform: translateX(4px);
+  }
+  
+  @media (max-width: 768px) {
+    .contact {
+      padding: var(--space-3xl) var(--space-lg);
+    }
+  
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  
+    .contact-link {
+      grid-template-columns: 90px 1fr auto;
+      gap: var(--space-md);
+    }
+}
