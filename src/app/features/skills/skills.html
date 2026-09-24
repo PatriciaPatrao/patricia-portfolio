@@ -1,0 +1,39 @@
+<section class="skills" id="skills">
+    <div class="skills-content">
+  
+      <div class="section-heading">
+        <p class="eyebrow">SKILLS</p>
+  
+        <h2>
+          Technologies I use to build and deliver software.
+        </h2>
+      </div>
+  
+      <div class="skills-grid">
+  
+        @for (group of skillGroups; track group.title) {
+          <article class="skill-group">
+  
+            <div class="skill-group-header">
+              <span class="skill-index">
+                {{ $index + 1 }}
+              </span>
+  
+              <h3>{{ group.title }}</h3>
+            </div>
+  
+            <div class="skill-list">
+              @for (skill of group.skills; track skill) {
+                <span class="skill">
+                  {{ skill }}
+                </span>
+              }
+            </div>
+  
+          </article>
+        }
+  
+      </div>
+  
+    </div>
+  </section>

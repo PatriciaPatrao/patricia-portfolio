@@ -1,0 +1,115 @@
+.skills {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
+  }
+  
+  .skills-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+  
+  .section-heading {
+    max-width: 650px;
+  }
+  
+  .eyebrow {
+    margin: 0 0 var(--space-md);
+  
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+  
+  h2 {
+    margin: 0;
+  
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+  
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+  }
+  
+  .skill-group {
+    min-height: 220px;
+    padding: var(--space-xl);
+  
+    background: var(--color-bg);
+  
+    transition: background-color 0.2s ease;
+  }
+  
+  .skill-group:hover {
+    background: var(--color-surface);
+  }
+  
+  .skill-group-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .skill-index {
+    color: var(--color-accent);
+  
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  
+  .skill-group h3 {
+    margin: 0;
+  
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  
+    margin-top: var(--space-xl);
+  }
+  
+  .skill {
+    padding: 0.4rem 0.7rem;
+  
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+  
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  
+  .skill:hover {
+    border-color: var(--color-border-accent);
+    color: var(--color-text);
+  }
+  
+  @media (max-width: 768px) {
+    .skills {
+      padding: var(--space-3xl) var(--space-lg);
+    }
+  
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .skill-group {
+      min-height: auto;
+    }
+  }
