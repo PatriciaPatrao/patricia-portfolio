@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: 'projects/:slug',
     loadComponent: () =>
-      import('./features/project-detail/project-detail').then(
+      import('./features/projects/project-detail/project-detail').then(
         (m) => m.ProjectDetail
       )
   }
