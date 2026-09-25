@@ -12,7 +12,7 @@
       <div class="projects-grid">
   
         @for (project of projects; track project.name) {
-          <article class="project-card">
+          <a class="project-card" [routerLink]="['/projects', project.slug]">
   
             <div class="project-header">
               <span class="project-category">
@@ -38,7 +38,7 @@
               }
             </div>
   
-          </article>
+          </a>
         }
   
       </div>

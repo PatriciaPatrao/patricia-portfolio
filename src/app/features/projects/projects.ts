@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
 import { DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 interface ProjectItem {
   name: string;
+  slug: string;
   category: string;
   description: string;
   technologies: string[];
@@ -11,7 +13,7 @@ interface ProjectItem {
 
 @Component({
   selector: 'app-projects',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './projects.html',
   styleUrl: './projects.scss'
 })
@@ -20,6 +22,7 @@ export class Projects {
   projects: ProjectItem[] = [
     {
       name: 'GreenWatch',
+      slug: 'greenwatch',
       category: 'Professional Project',
       description:
         'Web platform for monitoring land and forest-related data, integrating interactive maps, data visualisation and REST APIs.',
@@ -33,7 +36,8 @@ export class Projects {
       ]
     },
     {
-      name: 'Newspace-Riscos',
+      name: 'Newspace-Riscos',  
+      slug: 'newspace-riscos',
       category: 'Professional Project',
       description:
         'Web platform combining geospatial data, backend services and database integration to support risk-related information and analysis.',
@@ -49,6 +53,7 @@ export class Projects {
     },
     {
       name: 'Forms Platform',
+      slug: 'forms-platform',
       category: 'Professional Project',
       description:
         'Angular-based platform for managing and working with digital forms, including frontend development, application configuration and dependency management.',
@@ -63,6 +68,7 @@ export class Projects {
     },
     {
       name: 'MetaFacturing',
+      slug: 'metafacturing',
       category: 'Professional Project',
       description:
         'Digital solution developed within an R&D environment, combining software development and data-driven functionality.',
