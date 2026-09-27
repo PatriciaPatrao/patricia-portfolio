@@ -164,7 +164,49 @@ h1 {
   line-height: 1.8;
 }
 
-.contribution-list {
+.copy-stack {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.info-card {
+  padding: var(--space-lg);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  background: rgba(13, 18, 24, 0.35);
+}
+
+.info-card h2,
+.workflow-item h2,
+.challenge-block h2 {
+  margin: 0 0 0.5rem;
+
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.info-card p,
+.workflow-item p {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.contribution-list,
+.workflow-list,
+.solution-list {
   display: grid;
   gap: 0.75rem;
 
@@ -174,7 +216,8 @@ h1 {
   list-style: none;
 }
 
-.contribution-list li {
+.contribution-list li,
+.workflow-item {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-md);
@@ -198,6 +241,41 @@ h1 {
   font-weight: 600;
   letter-spacing: 0.08em;
   font-variant-numeric: tabular-nums;
+}
+
+.challenge-block {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.solution-list li {
+  position: relative;
+
+  padding: 0.85rem 1rem 0.85rem 2.25rem;
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  background: rgba(13, 18, 24, 0.35);
+
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.solution-list li::before {
+  content: '';
+
+  position: absolute;
+  top: 1.2rem;
+  left: 1rem;
+
+  width: 0.4rem;
+  height: 0.4rem;
+
+  border-radius: 50%;
+
+  background: var(--color-accent);
 }
 
 .technologies {
@@ -318,6 +396,10 @@ h1 {
 
   .project-section {
     padding: var(--space-lg);
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
   }
 
   .project-nav {

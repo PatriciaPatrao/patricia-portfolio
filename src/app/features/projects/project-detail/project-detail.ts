@@ -18,6 +18,7 @@ export class ProjectDetail {
   project: ProjectItem | undefined;
   previousProject: ProjectItem | undefined;
   nextProject: ProjectItem | undefined;
+  displayTechnologies: string[] = [];
 
   constructor() {
     this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
@@ -37,11 +38,14 @@ export class ProjectDetail {
       this.project = undefined;
       this.previousProject = undefined;
       this.nextProject = undefined;
+      this.displayTechnologies = [];
       return;
     }
 
     this.project = PROJECTS[index];
     this.previousProject = PROJECTS[index - 1];
     this.nextProject = PROJECTS[index + 1];
+    this.displayTechnologies =
+      this.project.stack ?? this.project.technologies;
   }
 }

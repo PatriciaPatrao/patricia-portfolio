@@ -27,7 +27,7 @@
 
           <div class="meta-item">
             <dt>Stack</dt>
-            <dd>{{ project.technologies.length }} technologies</dd>
+            <dd>{{ displayTechnologies.length }} technologies</dd>
           </div>
         </dl>
       </div>
@@ -46,26 +46,108 @@
         </p>
       </section>
 
-      <section class="project-section">
-        <p class="section-label">MY CONTRIBUTION</p>
+      @if (project.roleSummary) {
+        <section class="project-section">
+          <p class="section-label">MY ROLE</p>
+          <p class="section-copy">
+            {{ project.roleSummary }}
+          </p>
+        </section>
+      }
 
-        <ol class="contribution-list">
-          @for (contribution of project.contributions; track contribution; let i = $index) {
-            <li>
-              <span class="contribution-index">
-                {{ contributionIndex(i) }}
-              </span>
-              <span>{{ contribution }}</span>
-            </li>
-          }
-        </ol>
-      </section>
+      @if (project.contributionGroups?.length) {
+        <section class="project-section">
+          <p class="section-label">KEY CONTRIBUTIONS</p>
+
+          <div class="info-grid">
+            @for (group of project.contributionGroups; track group.title) {
+              <article class="info-card">
+                <h2>{{ group.title }}</h2>
+                <p>{{ group.description }}</p>
+              </article>
+            }
+          </div>
+        </section>
+      } @else {
+        <section class="project-section">
+          <p class="section-label">MY CONTRIBUTION</p>
+
+          <ol class="contribution-list">
+            @for (contribution of project.contributions; track contribution; let i = $index) {
+              <li>
+                <span class="contribution-index">
+                  {{ contributionIndex(i) }}
+                </span>
+                <span>{{ contribution }}</span>
+              </li>
+            }
+          </ol>
+        </section>
+      }
+
+      @if (project.implementation?.length) {
+        <section class="project-section">
+          <p class="section-label">TECHNICAL IMPLEMENTATION</p>
+
+          <div class="copy-stack">
+            @for (paragraph of project.implementation; track paragraph) {
+              <p class="section-copy">
+                {{ paragraph }}
+              </p>
+            }
+          </div>
+        </section>
+      }
+
+      @if (project.workflows?.length) {
+        <section class="project-section">
+          <p class="section-label">USER-FACING WORKFLOWS</p>
+
+          <div class="workflow-list">
+            @for (workflow of project.workflows; track workflow.title; let i = $index) {
+              <article class="workflow-item">
+                <span class="contribution-index">
+                  {{ contributionIndex(i) }}
+                </span>
+                <div>
+                  <h2>{{ workflow.title }}</h2>
+                  <p>{{ workflow.description }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @if (project.challenge) {
+        <section class="project-section">
+          <p class="section-label">CHALLENGE &amp; SOLUTION</p>
+
+          <div class="challenge-block">
+            <div>
+              <h2>Challenge</h2>
+              <p class="section-copy">
+                {{ project.challenge.problem }}
+              </p>
+            </div>
+
+            <div>
+              <h2>Solution</h2>
+              <ul class="solution-list">
+                @for (point of project.challenge.response; track point) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+        </section>
+      }
 
       <section class="project-section">
         <p class="section-label">TECHNOLOGIES</p>
 
         <div class="technologies">
-          @for (technology of project.technologies; track technology) {
+          @for (technology of displayTechnologies; track technology) {
             <span class="technology">
               {{ technology }}
             </span>
