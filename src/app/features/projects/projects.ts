@@ -12,4 +12,8 @@ import { PROJECTS } from './project-data';
 
 export class Projects {
   projects = PROJECTS;
+
+  cardIndex(index: number): string {
+    return String(index + 1).padStart(2, '0');
+  }
 }

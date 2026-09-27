@@ -15,6 +15,7 @@
         <a
           class="project-card"
           [routerLink]="['/projects', project.slug]"
+          [attr.aria-label]="'View project ' + project.name"
         >
           <div class="project-header">
             <span class="project-category">
@@ -22,11 +23,13 @@
             </span>
 
             <span class="project-index">
-              {{ $index + 1 }}
+              {{ cardIndex($index) }}
             </span>
           </div>
 
           <h3>{{ project.name }}</h3>
+
+          <p class="role">{{ project.role }}</p>
 
           <p class="description">
             {{ project.shortDescription }}
@@ -41,7 +44,8 @@
           </div>
 
           <span class="project-link">
-            VIEW PROJECT →
+            VIEW PROJECT
+            <span class="project-link-arrow" aria-hidden="true">→</span>
           </span>
         </a>
       }
