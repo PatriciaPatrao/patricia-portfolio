@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ProjectItem, PROJECTS } from '../project-data';
@@ -11,14 +13,35 @@ import { ProjectItem, PROJECTS } from '../project-data';
 })
 export class ProjectDetail {
   private route = inject(ActivatedRoute);
+  private viewportScroller = inject(ViewportScroller);
 
   project: ProjectItem | undefined;
+  previousProject: ProjectItem | undefined;
+  nextProject: ProjectItem | undefined;
 
   constructor() {
-    const slug = this.route.snapshot.paramMap.get('slug');
+    this.route.paramMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      this.loadProject(params.get('slug'));
+      this.viewportScroller.scrollToPosition([0, 0]);
+    });
+  }
 
-    this.project = PROJECTS.find(
-      (project) => project.slug === slug
-    );
+  contributionIndex(index: number): string {
+    return String(index + 1).padStart(2, '0');
+  }
+
+  private loadProject(slug: string | null): void {
+    const index = PROJECTS.findIndex((project) => project.slug === slug);
+
+    if (index === -1) {
+      this.project = undefined;
+      this.previousProject = undefined;
+      this.nextProject = undefined;
+      return;
+    }
+
+    this.project = PROJECTS[index];
+    this.previousProject = PROJECTS[index - 1];
+    this.nextProject = PROJECTS[index + 1];
   }
 }

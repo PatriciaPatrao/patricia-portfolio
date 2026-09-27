@@ -1,49 +1,69 @@
 @if (project) {
-    <main class="project-detail">
-  
-      <header class="project-header">
-        <a
-          class="back-link"
-          routerLink="/"
-          fragment="projects"
-        >
-          ← BACK TO PROJECTS
-        </a>
-  
-        <p class="eyebrow">
-          {{ project.category }}
-        </p>
-  
-        <h1>
-          {{ project.name }}
-        </h1>
-  
+  <main class="project-detail">
+    <a
+      class="back-link"
+      routerLink="/"
+      fragment="projects"
+    >
+      <span aria-hidden="true">←</span>
+      BACK TO PROJECTS
+    </a>
+
+    <header class="project-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">{{ project.category }}</p>
+
+        <h1>{{ project.name }}</h1>
+
         <p class="lead">
           {{ project.shortDescription }}
         </p>
-      </header>
-  
+
+        <dl class="meta">
+          <div class="meta-item">
+            <dt>Role</dt>
+            <dd>{{ project.role }}</dd>
+          </div>
+
+          <div class="meta-item">
+            <dt>Stack</dt>
+            <dd>{{ project.technologies.length }} technologies</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <span class="hero-visual-label">PROJECT</span>
+        <span class="hero-visual-name">{{ project.name }}</span>
+      </div>
+    </header>
+
+    <div class="project-body">
       <section class="project-section">
         <p class="section-label">OVERVIEW</p>
-  
-        <p>
+        <p class="section-copy">
           {{ project.description }}
         </p>
       </section>
-  
+
       <section class="project-section">
         <p class="section-label">MY CONTRIBUTION</p>
-  
-        <ul>
-          @for (contribution of project.contributions; track contribution) {
-            <li>{{ contribution }}</li>
+
+        <ol class="contribution-list">
+          @for (contribution of project.contributions; track contribution; let i = $index) {
+            <li>
+              <span class="contribution-index">
+                {{ contributionIndex(i) }}
+              </span>
+              <span>{{ contribution }}</span>
+            </li>
           }
-        </ul>
+        </ol>
       </section>
-  
+
       <section class="project-section">
         <p class="section-label">TECHNOLOGIES</p>
-  
+
         <div class="technologies">
           @for (technology of project.technologies; track technology) {
             <span class="technology">
@@ -52,14 +72,46 @@
           }
         </div>
       </section>
-  
-    </main>
-  } @else {
-    <main class="project-not-found">
-      <h1>Project not found</h1>
-  
-      <a routerLink="/" fragment="projects">
-        ← BACK TO PROJECTS
-      </a>
-    </main>
+    </div>
+
+    <nav class="project-nav" aria-label="Other projects">
+      @if (previousProject) {
+        <a
+          class="nav-card"
+          [routerLink]="['/projects', previousProject.slug]"
+        >
+          <span class="nav-direction">← PREVIOUS</span>
+          <span class="nav-name">{{ previousProject.name }}</span>
+        </a>
+      } @else {
+        <span class="nav-card nav-card-empty"></span>
+      }
+
+      @if (nextProject) {
+        <a
+          class="nav-card nav-card-next"
+          [routerLink]="['/projects', nextProject.slug]"
+        >
+          <span class="nav-direction">NEXT →</span>
+          <span class="nav-name">{{ nextProject.name }}</span>
+        </a>
+      }
+    </nav>
+  </main>
+} @else {
+  <main class="project-not-found">
+    <p class="eyebrow">PROJECTS</p>
+    <h1>This project page is not ready yet.</h1>
+    <p class="lead">
+      The layout is in place. Content for this route can be added later.
+    </p>
+    <a
+      class="back-link"
+      routerLink="/"
+      fragment="projects"
+    >
+      <span aria-hidden="true">←</span>
+      BACK TO PROJECTS
+    </a>
+  </main>
 }
