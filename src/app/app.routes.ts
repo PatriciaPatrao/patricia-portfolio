@@ -4,7 +4,9 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/portfolio/portfolio').then((m) => m.Portfolio)
+      import('./features/portfolio/portfolio').then(
+        (m) => m.Portfolio
+      )
   },
   {
     path: 'projects/:slug',
