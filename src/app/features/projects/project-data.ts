@@ -332,23 +332,113 @@ export const PROJECTS: ProjectItem[] = [
     slug: 'newspace-3d',
     category: 'Professional Project',
     shortDescription:
-      'Part of ISQ’s Newspace platform, focused on interactive 3D visualisation of geospatial and climate-related data.',
+      'A Portuguese web viewer for selecting a predefined area, starting a satellite surface-reconstruction job, and inspecting the textured 3D result with risk metadata.',
     description:
-      'Newspace-3D is part of ISQ’s Newspace platform inside the GA40 system, extending the geospatial workflows with interactive 3D visualisation so users can explore areas of interest and their related data in a more intuitive way.',
-    role: 'Full-Stack Developer',
+      'Newspace-3D is a satellite surface-reconstruction viewer built around an existing scientific pipeline that turns multi-date satellite imagery into a textured mesh. An operator selects one of four predefined areas, starts the long-running reconstruction, and inspects the resulting mesh together with risk metadata. The interface is in Portuguese. Catalogue labels, dates, and metadata come from local assets. The mesh comes from the pipeline after the job finishes.',
+    role: 'Frontend Developer',
     contributions: [
-      'Frontend development with Angular',
-      'Interactive 3D visualisation of geospatial data',
-      'Integration with the Newspace API',
-      'Client-side data handling and user workflows'
+      'Angular 19 viewer with lazy routes for area selection and analysis',
+      'Leaflet map and sidebar kept in sync across four areas of interest',
+      'UTM to WGS84 conversion so the same footprint drives the map and the pipeline request',
+      'Job client that starts a reconstruction and polls until success, failure, or timeout',
+      'Three.js viewer for signed OBJ and MTL results, including vertex colours and camera fit',
+      'Risk metadata panel and Chart.js distribution of clearance bands',
+      'Unit tests for coordinate conversion, metadata parsing, vertex colours, and the pipeline client'
     ],
     technologies: [
       'Angular 19',
       'TypeScript',
       'RxJS',
+      'Three.js',
+      'Leaflet',
       'PrimeNG',
-      'Flask'
-    ]
+      'Chart.js'
+    ],
+    roleSummary:
+      'I built the Angular frontend that turns four UTM areas into a map, starts the existing reconstruction API, polls the job, and displays the textured mesh in Three.js, including risk metadata. I also drafted a broader Flask catalogue API. That draft was replaced by the team, so the running orchestration API is the integration surface, not a backend module I currently own. The scientific reconstruction pipeline, risk-analysis execution, MinIO utilities, and Docker job runner were already in the project or implemented by other contributors.',
+    stack: [
+      'Angular 19',
+      'TypeScript',
+      'RxJS',
+      'PrimeNG',
+      'Leaflet',
+      'Three.js',
+      'Chart.js',
+      'Karma',
+      'Jasmine'
+    ],
+    contributionGroups: [
+      {
+        title: 'Application Structure',
+        description:
+          'Initialised the Angular 19 application and implemented the reconstruction viewer as standalone components with lazy routes, OnPush change detection, and a Portuguese locale. Area selection and area analysis are separate pages. There is no global store: selection, search, and the active area are held in reactive streams.'
+      },
+      {
+        title: 'Area Selection',
+        description:
+          'A Leaflet map and a sidebar list the same four areas. Hover and press states stay in sync. Search filters the list by label or id. Choosing an area opens the analysis route, and an unknown id returns to the map.'
+      },
+      {
+        title: 'Geospatial Footprint',
+        description:
+          'Each area is a UTM rectangle. The viewer converts zone, hemisphere, easting, northing, width, and height into WGS84 corners for Leaflet. The same payload is sent unchanged when the reconstruction starts, so the map and the pipeline request stay aligned.'
+      },
+      {
+        title: 'Pipeline Client',
+        description:
+          'Selecting an area posts the area payload and receives a job id. The client polls job status every five seconds until success, failure, or timeout, and cancels the in-flight stream if another area is selected. The browser does not run the reconstruction.'
+      },
+      {
+        title: '3D Inspection',
+        description:
+          'The Three.js engine is kept outside the component tree. It loads the signed OBJ and MTL links, rewrites texture references so each file uses its own signed URL, applies vertex colours when they are stored on the geometry, fits the camera, and supports pan, rotate, zoom, and fullscreen.'
+      },
+      {
+        title: 'Risk Metadata',
+        description:
+          'The inspector shows catalogue metadata, a report dialog, and a timeline of local dates. Clearance counts are parsed into high, medium, and low bands and drawn with Chart.js. The timeline dates are catalogue data, not output from the pipeline.'
+      }
+    ],
+    implementation: [
+      'The viewer is an Angular 19 standalone application. Catalogue data and generated meshes are separate. Labels, dates, and metadata files come from local assets. The mesh is requested only through the pipeline client. Local, metadata, and area providers are injected behind tokens so the screens do not depend on a concrete source, while the mesh path always goes through the job client.',
+      'The map is created with Leaflet, not an Angular map wrapper. Areas are drawn as rectangles from the converted UTM bounds. The same area id is the route parameter, the catalogue id, and the payload sent to the API. A click navigates only when that id exists in the catalogue.',
+      'Starting a reconstruction returns immediately with a job id. A background process on the server runs the existing surface-reconstruction and risk-analysis containers, uploads the result, and marks the job complete. The interface polls until that status is terminal. Success is a set of signed download links, not a folder copied into the application. The OBJ and MTL files are found by name.',
+      'Signed texture URLs cannot be loaded as a relative material path, because each file has its own link. The material file is fetched and its texture names are replaced with those links before Three.js parses it. Vertex colours are enabled when the geometry carries them, which is required for infrastructure coloured in the vertices rather than a texture. The Angular service owns attach, resize, fullscreen, and disposal. The engine owns the WebGL scene.',
+      'An earlier Flask catalogue API, including extra reconstruction and metadata routes, was committed and later replaced. The current job endpoint, storage utilities, and container orchestration are team code. The lasting integration is the typed client, polling, error handling, and signed-link loading in the viewer.'
+    ],
+    workflows: [
+      {
+        title: 'Select an area',
+        description:
+          'The operator searches or browses four predefined areas on the map and in the sidebar. Highlight and active states match. The choice opens the analysis page.'
+      },
+      {
+        title: 'Start reconstruction',
+        description:
+          'The analysis page starts one pipeline job for that area and shows a stepped progress state while the server works. Changing area drops the previous in-flight request. The server job itself is not cancelled from the browser.'
+      },
+      {
+        title: 'Inspect the mesh',
+        description:
+          'When the job succeeds, the viewer loads the textured model, fits the camera, and enables navigation. Fit-to-model and fullscreen are available once the model is ready.'
+      },
+      {
+        title: 'Review risk metadata',
+        description:
+          'A side panel shows the selected reconstruction, summary fields, a report dialog, and a chart of clearance bands. The timeline marks the catalogue date that matches the reconstruction.'
+      }
+    ],
+    challenge: {
+      problem:
+        'Surface reconstruction is a long batch pipeline, not a file the page can load up front. The browser has to start a job, wait without blocking the route, and then display a mesh whose textures are individual signed links. The same area also has to be a map rectangle and the body of the pipeline request, and an earlier catalogue API did not remain the running backend.',
+      response: [
+        'The wait is one observable sequence with explicit stages, from pipeline start through texture loading. Polling continues while the job is processing and stops on success, failure, or timeout.',
+        'A new selection cancels the previous client stream, so the viewer does not apply an older result to the area now on screen.',
+        'The material file is rewritten so each texture uses its signed URL. The object file is loaded with those materials, and vertex colours are applied when the geometry contains them.',
+        'One area payload feeds both Leaflet and the reconstruction request, after the UTM rectangle is converted for the map.',
+        'The screens keep using the job contract the team’s API exposes. The broader catalogue API drafted earlier is not described as the current backend.'
+      ]
+    }
   },
 
   {
