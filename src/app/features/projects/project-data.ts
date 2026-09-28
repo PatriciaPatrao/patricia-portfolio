@@ -328,6 +328,30 @@ export const PROJECTS: ProjectItem[] = [
   },
 
   {
+    name: 'Newspace-3D',
+    slug: 'newspace-3d',
+    category: 'Professional Project',
+    shortDescription:
+      'Part of ISQ’s Newspace platform, focused on interactive 3D visualisation of geospatial and climate-related data.',
+    description:
+      'Newspace-3D is part of ISQ’s Newspace platform inside the GA40 system, extending the geospatial workflows with interactive 3D visualisation so users can explore areas of interest and their related data in a more intuitive way.',
+    role: 'Full-Stack Developer',
+    contributions: [
+      'Frontend development with Angular',
+      'Interactive 3D visualisation of geospatial data',
+      'Integration with the Newspace API',
+      'Client-side data handling and user workflows'
+    ],
+    technologies: [
+      'Angular 19',
+      'TypeScript',
+      'RxJS',
+      'PrimeNG',
+      'Flask'
+    ]
+  },
+
+  {
     name: 'Forms Platform',
     slug: 'forms',
     category: 'Professional Project',
