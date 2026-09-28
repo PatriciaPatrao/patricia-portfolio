@@ -30,9 +30,9 @@
 
 .project-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
   gap: var(--space-2xl);
-  align-items: stretch;
+  align-items: end;
 
   margin-top: var(--space-2xl);
   padding-bottom: var(--space-2xl);
@@ -65,89 +65,62 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 1.05rem;
   line-height: 1.8;
+  text-align: justify;
 }
 
-.meta {
+.hero-panel {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
   gap: var(--space-xl);
-
-  margin: var(--space-xl) 0 0;
-}
-
-.meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.meta-item dt {
-  color: var(--color-text-secondary);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.meta-item dd {
-  margin: 0;
-
-  color: var(--color-text);
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.hero-visual {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: var(--space-sm);
-  min-height: 280px;
+  min-height: 220px;
   padding: var(--space-xl);
 
-  border: 1px solid var(--color-border-accent);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-accent);
   border-radius: var(--radius-md);
 
-  background:
-    linear-gradient(
-      160deg,
-      rgba(74, 168, 216, 0.18),
-      rgba(19, 27, 36, 0.4) 45%,
-      var(--color-surface)
-    );
+  background: var(--color-surface);
 }
 
-.hero-visual-label {
+.hero-panel-label {
+  margin: 0 0 0.4rem;
+
   color: var(--color-accent);
   font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
 }
 
-.hero-visual-name {
-  font-size: 1.4rem;
+.hero-panel-value {
+  margin: 0;
+
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 .project-body {
   display: grid;
-  gap: var(--space-xl);
+  gap: 0;
 
-  margin-top: var(--space-2xl);
+  margin-top: 0;
 }
 
 .project-section {
-  padding: var(--space-xl);
+  display: grid;
+  grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
 
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  padding: var(--space-2xl) 0;
 
-  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  background: transparent;
 }
 
 .section-label {
-  margin: 0 0 var(--space-lg);
+  margin: 0.2rem 0 0;
 
   color: var(--color-accent);
   font-size: 0.72rem;
@@ -162,6 +135,7 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 1rem;
   line-height: 1.8;
+  text-align: justify;
 }
 
 .copy-stack {
@@ -169,7 +143,8 @@ h1 {
   gap: var(--space-lg);
 }
 
-.info-grid {
+.info-grid,
+.workflow-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-md);
@@ -181,7 +156,13 @@ h1 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 
-  background: rgba(13, 18, 24, 0.35);
+  background: var(--color-surface);
+
+  transition: border-color 0.2s ease;
+}
+
+.info-card:hover {
+  border-color: var(--color-border-accent);
 }
 
 .info-card h2,
@@ -202,14 +183,21 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 0.92rem;
   line-height: 1.7;
+  text-align: justify;
 }
 
 .contribution-list,
-.workflow-list,
 .solution-list {
   display: grid;
   gap: 0.75rem;
 
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.workflow-list {
   margin: 0;
   padding: 0;
 
@@ -233,6 +221,7 @@ h1 {
   color: var(--color-text);
   font-size: 0.95rem;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .contribution-index {
@@ -245,7 +234,9 @@ h1 {
 
 .challenge-block {
   display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: var(--space-xl);
+  align-items: start;
 }
 
 .solution-list li {
@@ -261,6 +252,7 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 0.95rem;
   line-height: 1.7;
+  text-align: justify;
 }
 
 .solution-list li::before {
@@ -385,21 +377,25 @@ h1 {
     padding: var(--space-xl) var(--space-lg) var(--space-3xl);
   }
 
-  .project-hero {
+  .project-hero,
+  .project-section,
+  .challenge-block,
+  .info-grid,
+  .workflow-list {
     grid-template-columns: 1fr;
+  }
+
+  .project-hero {
     gap: var(--space-xl);
   }
 
-  .hero-visual {
-    display: none;
+  .hero-panel {
+    min-height: 0;
   }
 
   .project-section {
-    padding: var(--space-lg);
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    padding: var(--space-xl) 0;
   }
 
   .project-nav {

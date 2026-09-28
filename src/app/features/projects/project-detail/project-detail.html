@@ -19,23 +19,27 @@
           {{ project.shortDescription }}
         </p>
 
-        <dl class="meta">
-          <div class="meta-item">
-            <dt>Role</dt>
-            <dd>{{ project.role }}</dd>
-          </div>
-
-          <div class="meta-item">
-            <dt>Stack</dt>
-            <dd>{{ displayTechnologies.length }} technologies</dd>
-          </div>
-        </dl>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <span class="hero-visual-label">PROJECT</span>
-        <span class="hero-visual-name">{{ project.name }}</span>
-      </div>
+      <aside class="hero-panel">
+        <div>
+          <p class="hero-panel-label">ROLE</p>
+          <p class="hero-panel-value">{{ project.role }}</p>
+        </div>
+
+        @if (project.stack) {
+          <div>
+            <p class="hero-panel-label">CORE STACK</p>
+            <div class="technologies">
+              @for (technology of project.technologies; track technology) {
+                <span class="technology">
+                  {{ technology }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </aside>
     </header>
 
     <div class="project-body">
