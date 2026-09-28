@@ -14,5 +14,10 @@ export const routes: Routes = [
       import('./features/projects/project-detail/project-detail').then(
         (m) => m.ProjectDetail
       )
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./features/not-found/not-found').then((m) => m.NotFound)
   }
 ];
