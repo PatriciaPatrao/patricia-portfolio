@@ -356,24 +356,142 @@ export const PROJECTS: ProjectItem[] = [
     slug: 'forms',
     category: 'Professional Project',
     shortDescription:
-      'Angular-based platform for managing and working with digital forms.',
+      'A production survey platform for designing structured questionnaires, distributing them to respondents, collecting answers, and reviewing results.',
     description:
-      'An Angular-based platform developed to support digital form workflows and frontend application functionality.',
-    role: 'Software Developer',
+      'Forms is a multi-user survey platform for designing structured questionnaires, distributing them, collecting answers, and reviewing results. A survey is the template: modules and questions, with optional repeated sections and calculated results. A survey answer is a distribution of that template, and a user answer survey is one respondent’s session. Questions support text, dropdown, rank, file, number, date, list, yes/no, and results calculated from other numeric answers. The Angular application is organised around three authenticated areas — authoring, answering, and results — with a public landing page and Cognito login outside that shell. Shared response links can be opened without the normal login route.',
+    role: 'Full-Stack Developer',
     contributions: [
-      'Frontend development with Angular',
-      'Reactive Forms implementation',
-      'Application configuration',
-      'Dependency management'
+      'Authenticated shell with role-aware navigation for authoring, answering, and results',
+      'Survey, module, and question authoring, including formulas, rank scales, and repeated sections',
+      'Questionnaire preview and a navigable workflow map',
+      'Respondent flow with a progress tree, next and previous questions, files, and submit',
+      'Results screens with charts, rank averages, and CSV, PDF, and clipboard export',
+      'Internationalisation across English and Portuguese, with a structure for further languages',
+      'Targeted API changes required by those screens, including leaner survey payloads and rank aggregation'
     ],
     technologies: [
       'Angular 17',
       'TypeScript',
-      'SCSS',
-      'Reactive Forms',
-      'Node.js',
-      'npm'
-    ]
+      'RxJS',
+      'PrimeNG',
+      'Chart.js',
+      'AWS Cognito',
+      'Flask'
+    ],
+    roleSummary:
+      'I have been a primary contributor to the Angular application since the Forms front end was split out of an earlier template in September 2024. My work covers survey authoring, the respondent experience, results screens, internationalisation, and the HTTP services in front of the API. I am not the author of the platform backend. My API changes are a smaller set of fixes and extensions required by those screens. I did not own infrastructure, authentication design, document parsing, the carbon-equivalent calculation, or the AI reporting pipeline. Alongside implementation, I worked with stakeholders and product owners on requirements, edge cases, and how users should move through a survey.',
+    stack: [
+      'Angular 17',
+      'TypeScript',
+      'RxJS',
+      'PrimeNG',
+      'Chart.js',
+      'jsPDF',
+      'AWS Amplify',
+      'AWS Cognito',
+      'ngx-translate',
+      'Flask',
+      'PostgreSQL',
+      'Redis',
+      'MinIO',
+      'Docker',
+      'nginx',
+      'CircleCI',
+      'Karma',
+      'Jasmine'
+    ],
+    contributionGroups: [
+      {
+        title: 'Application Shell',
+        description:
+          'Built the authenticated structure with lazy-loaded areas for surveys, answering, and results. A route guard sends unauthenticated users to login, while shared answering uses a separate route. The menu follows Cognito groups, and an HTTP interceptor carries the admin impersonation header. The impersonation rules themselves live in the API and were implemented by another contributor.'
+      },
+      {
+        title: 'Survey Authoring',
+        description:
+          'Implemented list, create, edit, clone, send, and save-as-template flows. Titles are validated, descriptions are optional, and a simplified survey payload lets the list render without downloading every module and question. Module order is edited in the interface and persisted by the API.'
+      },
+      {
+        title: 'Questions and Repeats',
+        description:
+          'Built the question editor for the supported types, including translated yes/no values, configurable rank scales, and result questions whose formula labels and numeric inputs come from the API. List questions can create repeated child modules, which is how a branching questionnaire is edited.'
+      },
+      {
+        title: 'Preview and Workflow Map',
+        description:
+          'Added a read-only preview with a desktop and mobile viewport, and a pannable, zoomable map of modules, questions, and list-driven branches. Nodes that correspond to an editor route open that screen. Unit tests cover the graph and the workflow service.'
+      },
+      {
+        title: 'Answering',
+        description:
+          'Implemented the respondent dashboard, the question tree, and next and previous navigation through the API rather than a hardcoded linear list. Saves include the parent keys for repeated sections, files can be uploaded and previewed, and answers can be copied between repeated instances. Answer loading was cached, and later extra per-question calls were removed once the API included answers in the tree.'
+      },
+      {
+        title: 'Results and Export',
+        description:
+          'Built the author-facing results view: recipients, per-user replies, and per-question charts, including rank scales and averages. Browser export covers CSV, PDF, and copy as rich text or an HTML table. The report action calls the interpretation endpoint. Email composition, the PDF attachment, and the AI report text are backend behaviour implemented mainly by others.'
+      },
+      {
+        title: 'Internationalisation',
+        description:
+          'Applied translations across authoring, answering, results, the landing page, and the top bar. English and Portuguese are the most complete. Spanish, French, and German have partial coverage. Labels are mapped back to the values the API stores before save.'
+      },
+      {
+        title: 'API Changes',
+        description:
+          'Made focused server changes required by the screens: simplified survey JSON, consistent yes/no and multiple-choice handling, distinct rows for repeated sections, answers included in the tree, multilingual formula labels, rank averages for the charts, and cache invalidation when a survey is cloned. I did not implement SMTP, shared-response tokens, Redis, MinIO, the carbon calculator, or the AI interpretation stages.'
+      }
+    ],
+    implementation: [
+      'The browser is an Angular 17 application. Cognito, through AWS Amplify, provides the session. Requests go to a Flask API, which stores surveys, modules, questions, and answers in PostgreSQL, caches tree reads in Redis, and stores question images and uploaded files in MinIO. Invitation and report emails are sent by the server. The stack runs with Docker, nginx, and CircleCI. Secrets are loaded with Doppler, and the API is linted with Flake8.',
+      'Authoring, answering, and results are separate feature areas. HTTP stays in services that share a response envelope, and components handle loading, validation, and messages. The next question is chosen by the API, so branching rules stay in one place. The client validates required titles, formula fields, and unanswered source modules. The API enforces its own constraints, including when a survey is closed because answers already exist.',
+      'Where the history cannot show who designed a feature versus who connected a screen to an existing API, the screen is described as integration. Authentication design, email transport, storage, caching, Excel and DOCX parsing, carbon calculation, and AI interpretation were built mainly by other contributors. I connected those capabilities in the interface and, for formula labels and rank averages, extended the API so the screens could display them correctly.',
+      'Front-end unit tests exist for selected behaviour, including the workflow map, preview, answering, and import. The CircleCI pipeline that runs on the API is Flake8 and a Docker build, not the Angular test suite, so those specs are present in the repository rather than a gate on every change.'
+    ],
+    workflows: [
+      {
+        title: 'Create a questionnaire',
+        description:
+          'An author signs in, creates a survey, and adds ordered or unordered modules and typed questions, including formulas, rank scales, and list questions that branch into repeated sections.'
+      },
+      {
+        title: 'Preview the structure',
+        description:
+          'Preview and the workflow map read the same tree and show how the questionnaire fits together before anything is sent.'
+      },
+      {
+        title: 'Send',
+        description:
+          'From the survey list, the author enters a title and recipients. The API creates one response record per recipient and emails a link. I built the send dialog and the recipient list. The message body and mail transport are server-side.'
+      },
+      {
+        title: 'Answer',
+        description:
+          'The respondent opens the link, signs in or uses the shared route, and moves through the tree. Each save stores the answer, including files and repeated-section keys. Submit sets the end of the session on the server.'
+      },
+      {
+        title: 'Review and export',
+        description:
+          'Authors see who was invited, who replied, and how each question was answered, including rank averages. Results can be copied, exported as CSV or PDF, or sent as a report.'
+      },
+      {
+        title: 'Templates and import',
+        description:
+          'A survey can be saved as a reusable template. Import uploads a file and shows success or failure. The Excel and DOCX parsers, including document interpretation, are API modules I did not write.'
+      }
+    ],
+    challenge: {
+      problem:
+        'A questionnaire is not a flat form. Modules can be ordered or unordered, list questions create repeated sections, and the next question depends on earlier answers. The survey list could not download the full tree just to render a row, the answering screen could not refetch every question while the tree updated, and results needed rank averages the existing analysis did not provide. Several platform features — email, file import, storage, and AI reports — already existed on the server and had to be used without treating them as work I designed.',
+      response: [
+        'The authoring UI distinguishes a normal dropdown from a list question that creates child modules, and the answering tree copies answers between repeated instances.',
+        'Next and previous call the API’s next-question endpoint, so branching stays on the server. An earlier client-side attempt to force completion status was removed.',
+        'A simplified survey payload returns list metadata without the child tree. Answers were later included in the tree response, and the extra per-question calls were removed.',
+        'Rank aggregation and average scores were added on the analysis path the charts use, with tests for that behaviour. The reporting pipeline around it was built by others.',
+        'Formula and question-type labels follow the active language in the interface and are mapped back to the stored values before save.',
+        'Upload, template management, and the report action sit on top of import, storage, and interpretation endpoints. The parsers, object storage, and AI report text remain platform work I integrated with.'
+      ]
+    }
   },
 
   {
