@@ -589,22 +589,120 @@ export const PROJECTS: ProjectItem[] = [
     slug: 'metafacturing',
     category: 'Professional Project',
     shortDescription:
-      'Digital solution developed within an R&D environment, combining software development and data-driven functionality.',
+      'A full-stack website and API for exploring welding process data within an EU digital-twin project, complemented by the exploitation and business plan I developed for ISQ.',
     description:
-      'A digital solution developed in an R&D environment, combining software development with data-driven functionality.',
-    role: 'Software Developer',
+      'MetaFacturing is a Horizon Europe project on data and metadata for manufacturing lines. Its public aim is a digital-twin toolchain for metal parts, especially casting and welding, so production can cope with recycled materials, reduce scrap, and make better use of process data. ISQ is one of thirteen partners. As a Full-Stack Developer, I built and tested the website and its Python API, connecting the user interface to processed welding data. My contribution also extended beyond software into usability requirements, materials-data templates, and the exploitation and business plan led by ISQ.',
+    role: 'Full-Stack Developer',
     contributions: [
-      'Software development',
-      'Frontend development',
-      'API integration',
-      'Data-driven functionality'
+      'Built the Angular website for presenting and exploring processed welding data',
+      'Built the Flask REST API that transforms welding records into plot-ready responses',
+      'Tested the website and API, including endpoint behaviour and data-response handling',
+      'Authored ISQ’s exploitation strategy and business plan, including the business-model canvas',
+      'Learned the canvas method and revised the plan across project milestones and partner review',
+      'Prepared usability requirements for how designers, engineers, and operators would use the toolchain',
+      'Prepared CHADA templates for casting and welding process data'
     ],
     technologies: [
       'Angular',
       'TypeScript',
       'Python',
+      'Flask',
+      'pandas',
       'REST APIs',
-      'SQL'
-    ]
+      'Docker'
+    ],
+    roleSummary:
+      'As a Full-Stack Developer, I built and tested both sides of the MetaFacturing web solution: the Angular website used to present the data and the Flask API that reads processed welding records and prepares them for visualisation. I worked across the interface, API contract, data transformation, integration, and validation of the complete flow. I also wrote the exploitation and business plan ISQ led, proactively learning the business-model method, and prepared usability requirements and CHADA templates. The digital-twin models, partner platforms, and financial simulation were developed elsewhere in the consortium or with colleagues.',
+    stack: [
+      'Angular',
+      'TypeScript',
+      'Python',
+      'Flask',
+      'pandas',
+      'PyArrow',
+      'PostgreSQL',
+      'Docker',
+      'REST APIs',
+      'API Testing'
+    ],
+    contributionGroups: [
+      {
+        title: 'Website Development',
+        description:
+          'Built the Angular website that gives users access to processed welding information. I connected the interface to the API, handled the returned time-series and process markers, and turned technical manufacturing data into a visual flow that could be reviewed through the browser.'
+      },
+      {
+        title: 'API Development',
+        description:
+          'Built the Flask REST API behind the website. The service reads processed Parquet records, normalises welding current, voltage, and seam signals, identifies process-phase markers, and returns a structured JSON response for visualisation. It also includes a data-access path for weld-seam anomaly scores stored in PostgreSQL and is packaged with Docker.'
+      },
+      {
+        title: 'Full-Stack Testing',
+        description:
+          'Tested the website and API as one workflow, checking requests, response structure, data handling, visualisation inputs, and error cases. The API repository includes endpoint testing through Flask’s test client, while integration testing verified that the website could request and use the processed welding data correctly.'
+      },
+      {
+        title: 'Business Plan',
+        description:
+          'I authored the business plan ISQ delivered for the consortium. It sets out the opportunity, the service rationale, a business-model canvas, and the blocks behind that canvas: value proposition, market needs, activities, partners, customer segments, channels, and cost structure. Later versions add a commercial view, risks, growth, and how the plan would be monitored. Partners reviewed the document. Market figures, partner positions, and intellectual-property terms stay in the project deliverable.'
+      },
+      {
+        title: 'Learning the Method',
+        description:
+          'Writing a business plan was new work for me. I learned the canvas, the value proposition, and how a team aligns around them, then applied that structure to MetaFacturing. The plan moved with the milestones: an early draft, a revision after review, and a later update as the project matured.'
+      },
+      {
+        title: 'Usability Requirements',
+        description:
+          'ISQ led the usability requirements for the toolchain. I set out what designers, engineers, and operators would need in order to use the same process data: a coherent interface, documentation, training, and room for those roles to work together. The frameworks those requirements describe were built across the consortium.'
+      },
+      {
+        title: 'Materials Data Templates',
+        description:
+          'For the casting and welding use cases I prepared CHADA templates, so captured process information could be shared in a recognised materials format. MODA sat in the same data-exchange context. I did not define the standards. My part was the template and how the use-case data would fit it.'
+      }
+    ],
+    implementation: [
+      'MetaFacturing is a three-year Horizon Europe project coordinated by KU Leuven, with ISQ as a partner. The public description is a digitised toolchain and a digital-twin framework for industrial metal-part production. Within that wider consortium effort, I developed the full-stack web solution that connects users to processed welding information.',
+      'The website is an Angular and TypeScript application connected to a Python and Flask API. The API receives a request for a processed welding record, reads the Parquet data with pandas and PyArrow, scales the relevant signals, and returns time, welding current, welding voltage, welding-start and arc-stable flags, seam number, and process-phase markers as JSON. A PostgreSQL path supports weld-seam anomaly-score data, and Docker provides the service environment.',
+      'Testing covered both layers and the contract between them. API checks use Flask’s test client to exercise the endpoint and validate its response, while full-stack checks verify that the website can request, interpret, and present the returned data. This made data shape, failure handling, and frontend integration part of the implementation rather than afterthoughts.',
+      'The plan is organised so it can be updated at each milestone. I drafted it, took review comments, and revised the structure. The study follows the business-model canvas and identifies stakeholders, markets, and services. A financial simulation used by that commercial view was prepared separately. Market figures, prices, and agreements stay in the deliverable.',
+      'Alongside the plan I worked on the points where people and data meet the toolchain. Usability requirements describe the interface, the documentation, and the support an industrial user would need. CHADA templates give casting and welding data a common sheet. Both sit next to the business plan: a result is only exploitable if someone can use it and if the data can travel.',
+      'The rest of the toolchain stays where it was built. Process models, partner factory systems, the materials standards themselves, and the financial model are consortium work, or work prepared with colleagues.'
+    ],
+    workflows: [
+      {
+        title: 'Request welding data',
+        description:
+          'A user selects or opens a processed welding record in the website. The Angular application sends the corresponding request to the Flask API and handles the loading, success, and failure states.'
+      },
+      {
+        title: 'Transform the record',
+        description:
+          'The API reads the Parquet file, normalises the required welding signals, derives the process-phase markers, and returns a structured response designed for the website’s visualisation.'
+      },
+      {
+        title: 'Present and test the result',
+        description:
+          'The website presents the time series and process information. Website, API, and integration checks confirm that the request, response, error behaviour, and visualisation inputs work together.'
+      },
+      {
+        title: 'Develop the exploitation plan',
+        description:
+          'In parallel with development, I structured the project’s opportunity, value proposition, users, partners, channels, costs, risks, and growth through the business-model canvas and successive business-plan revisions.'
+      }
+    ],
+    challenge: {
+      problem:
+        'The work crossed several disciplines at once: an Angular interface, a Python API, industrial welding data, data standards, usability, and a business plan. The software had to turn processed manufacturing records into reliable visualisation inputs, while the exploitation work required business methods that were new to me.',
+      response: [
+        'I built and tested the website and API as one full-stack flow, defining how the interface requests data and how the backend transforms and returns it.',
+        'I validated endpoint behaviour, response structure, failure cases, and the website’s handling of the returned visualisation data.',
+        'I learned the business-model canvas, the value proposition, and team alignment, and I used them to draft, review, and revise the plan across the project milestones.',
+        'The plan covers opportunity, service, canvas, commercial direction, risk, and monitoring. Market figures and agreements stay in the deliverable. The financial simulation is credited as separate work.',
+        'Usability requirements and CHADA templates connect the plan to how a person would use the toolchain and how process data would be shared.',
+        'The wider digital-twin models and partner systems remain consortium work, while this case study focuses on the web solution and supporting deliverables I developed.'
+      ]
+    }
   }
 ];
