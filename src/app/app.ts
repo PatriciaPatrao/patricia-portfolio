@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from './core/theme/theme.service';
 import { Navbar } from './shared/components/navbar/navbar';
 
 @Component({
@@ -9,4 +10,7 @@ import { Navbar } from './shared/components/navbar/navbar';
   styleUrl: './app.scss'
 })
 
-export class App {}
+export class App {
+  /** Ensures theme is applied even if the navbar is not mounted. */
+  private readonly _themeService = inject(ThemeService);
+}

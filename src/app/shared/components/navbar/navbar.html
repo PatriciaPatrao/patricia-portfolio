@@ -4,13 +4,25 @@
       PATRÍCIA
     </a>
 
-    <div class="nav-links">
-      <a href="/">HOME</a>
-      <a href="#about">ABOUT</a>
-      <a href="#experience">EXPERIENCE</a>
-      <a routerLink="/" fragment="projects">PROJECTS</a>      
-      <a href="#skills">SKILLS</a>
-      <a href="#contact">CONTACT</a>
+    <div class="nav-controls">
+      <div class="nav-links">
+        <a href="/">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#experience">EXPERIENCE</a>
+        <a routerLink="/" fragment="projects">PROJECTS</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#contact">CONTACT</a>
+      </div>
+
+      <button
+        type="button"
+        class="theme-toggle"
+        [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        [attr.aria-pressed]="theme() === 'light'"
+        (click)="toggleTheme()"
+      >
+        {{ theme() === 'dark' ? 'Dark' : 'Light' }}
+      </button>
     </div>
   </div>
 </nav>

@@ -1,7 +1,10 @@
 // Approach: Dark Tech
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-:root {
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
   --color-bg: #0d1218;
   --color-surface: #131b24;
   --color-surface-secondary: #18222d;
@@ -11,9 +14,18 @@
 
   --color-accent: #4aa8d8;
   --color-accent-secondary: #45c2d8;
+  --color-accent-text: #4aa8d8;
+  --color-on-accent: #0d1218;
 
   --color-border: rgba(255, 255, 255, 0.08);
   --color-border-accent: rgba(56, 189, 248, 0.35);
+  --color-button-border: rgba(255, 255, 255, 0.18);
+
+  --color-navbar: rgba(13, 18, 24, 0.9);
+  --color-inset: rgba(13, 18, 24, 0.35);
+  --color-chip: rgba(13, 18, 24, 0.45);
+
+  --shadow-elevated: 0 18px 40px rgba(0, 0, 0, 0.28);
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -27,6 +39,32 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 5rem;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --color-bg: #f4f7fa;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #e8eef4;
+
+  --color-text: #121820;
+  --color-text-secondary: #4a5968;
+
+  --color-accent: #4aa8d8;
+  --color-accent-secondary: #45c2d8;
+  --color-accent-text: #15648a;
+  --color-on-accent: #0d1218;
+
+  --color-border: rgba(13, 18, 24, 0.12);
+  --color-border-accent: rgba(21, 100, 138, 0.4);
+  --color-button-border: rgba(13, 18, 24, 0.2);
+
+  --color-navbar: rgba(244, 247, 250, 0.9);
+  --color-inset: rgba(13, 18, 24, 0.04);
+  --color-chip: rgba(13, 18, 24, 0.06);
+
+  --shadow-elevated: 0 18px 40px rgba(13, 18, 24, 0.12);
 }
 
 * {
@@ -71,5 +109,5 @@ img {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
 }

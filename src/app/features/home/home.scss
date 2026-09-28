@@ -16,7 +16,7 @@
 .eyebrow {
   margin: 0 0 var(--space-md);
 
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -83,7 +83,7 @@ h1 {
 
 .button-primary {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
 }
 
 .button-primary:hover {
@@ -91,14 +91,14 @@ h1 {
 }
 
 .button-secondary {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: var(--color-button-border);
   background: transparent;
   color: var(--color-text);
 }
 
 .button-secondary:hover {
   border-color: var(--color-accent);
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .tech-indicator {

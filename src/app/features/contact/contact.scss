@@ -20,7 +20,7 @@
   .eyebrow {
     margin: 0 0 var(--space-md);
   
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.16em;
@@ -67,7 +67,7 @@
   }
   
   .contact-label {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   
     font-size: 0.7rem;
     font-weight: 600;
@@ -94,7 +94,7 @@
   
   .contact-link:hover .contact-value,
   .contact-link:hover .contact-arrow {
-    color: var(--color-accent);
+    color: var(--color-accent-text);
   }
   
   .contact-link:hover .contact-arrow {
@@ -115,4 +115,4 @@
       grid-template-columns: 90px 1fr auto;
       gap: var(--space-md);
     }
-}
+  }

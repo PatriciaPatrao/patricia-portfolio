@@ -17,7 +17,7 @@
 .eyebrow {
   margin: 0 0 var(--space-md);
 
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -87,7 +87,7 @@ h2 {
 .project-card:focus-visible {
   border-color: var(--color-border-accent);
   background: var(--color-surface-secondary);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--shadow-elevated);
   transform: translateY(-4px);
 }
 
@@ -110,7 +110,7 @@ h2 {
 }
 
 .project-category {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -173,7 +173,7 @@ h2 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 
-  background: rgba(13, 18, 24, 0.45);
+  background: var(--color-chip);
 
   color: var(--color-text-secondary);
   font-size: 0.7rem;
@@ -201,7 +201,7 @@ h2 {
 
 .project-card:hover .project-link,
 .project-card:focus-visible .project-link {
-  color: var(--color-accent);
+  color: var(--color-accent-text);
 }
 
 .project-card:hover .project-link-arrow,
