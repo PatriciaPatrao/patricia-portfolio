@@ -277,6 +277,7 @@ h1 {
 }
 
 .technology {
+  max-width: 100%;
   padding: 0.4rem 0.75rem;
 
   border: 1px solid var(--color-border);
@@ -287,6 +288,7 @@ h1 {
   color: var(--color-text-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
 }
 
 .project-nav {
@@ -347,6 +349,7 @@ h1 {
   color: var(--color-text);
   font-size: 1.05rem;
   font-weight: 600;
+  overflow-wrap: break-word;
 }
 
 .nav-card:hover .nav-direction,
@@ -391,6 +394,15 @@ h1 {
 
   .hero-panel {
     min-height: 0;
+  }
+
+  .lead,
+  .section-copy,
+  .info-card p,
+  .workflow-item p,
+  .contribution-list li,
+  .solution-list li {
+    text-align: start;
   }
 
   .project-section {

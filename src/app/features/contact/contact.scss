@@ -55,30 +55,33 @@
   
   .contact-link {
     display: grid;
-    grid-template-columns: 110px 1fr auto;
+    grid-template-columns: 110px minmax(0, 1fr) auto;
     align-items: center;
     gap: var(--space-lg);
-  
+
     padding: var(--space-lg) 0;
-  
+
     border-bottom: 1px solid var(--color-border);
-  
+
     color: var(--color-text);
   }
-  
+
   .contact-label {
     color: var(--color-accent-text);
-  
+
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
   }
-  
+
   .contact-value {
+    min-width: 0;
+
     color: var(--color-text-secondary);
-  
+
     font-size: 0.95rem;
-  
+    overflow-wrap: anywhere;
+
     transition: color 0.2s ease;
   }
   
@@ -112,7 +115,7 @@
     }
   
     .contact-link {
-      grid-template-columns: 90px 1fr auto;
+      grid-template-columns: 90px minmax(0, 1fr) auto;
       gap: var(--space-md);
     }
   }
