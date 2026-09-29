@@ -15,7 +15,10 @@ export function buildWhatsAppShareUrl(portfolioUrl: string): string {
   return `https://wa.me/?text=${text}`;
 }
 
-export function buildLinkedInShareUrl(portfolioUrl: string): string {
-  const url = encodeURIComponent(portfolioUrl);
-  return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+/**
+ * Opens LinkedIn Messages (not the feed/share composer).
+ * LinkedIn does not expose a public URL that prefills a message body.
+ */
+export function buildLinkedInShareUrl(_portfolioUrl: string): string {
+  return 'https://www.linkedin.com/messaging/';
 }

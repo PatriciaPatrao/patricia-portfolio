@@ -109,7 +109,7 @@ describe('ShareSend', () => {
       'a[aria-label="Share portfolio on WhatsApp"]'
     ) as HTMLAnchorElement;
     const linkedin = root.querySelector(
-      'a[aria-label="Share portfolio on LinkedIn"]'
+      'a[aria-label="Open LinkedIn Messages"]'
     ) as HTMLAnchorElement;
 
     expect(email.getAttribute('href')).toBe(buildEmailShareUrl(expectedUrl));

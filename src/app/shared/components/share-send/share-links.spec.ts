@@ -29,11 +29,11 @@ describe('share-links', () => {
     );
   });
 
-  it('builds a LinkedIn share-offsite URL with the portfolio URL', () => {
+  it('opens LinkedIn Messages instead of the share-offsite composer', () => {
     const href = buildLinkedInShareUrl(PORTFOLIO_URL);
 
-    expect(href).toBe(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(PORTFOLIO_URL)}`
-    );
+    expect(href).toBe('https://www.linkedin.com/messaging/');
+    expect(href).not.toContain('share-offsite');
+    expect(href).not.toContain('sharing/');
   });
 });
