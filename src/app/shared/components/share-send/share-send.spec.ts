@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import QRCode from 'qrcode';
 
+import { SITE_CONFIG } from '../../../core/site/site.config';
 import {
   buildEmailShareUrl,
   buildLinkedInShareUrl,
@@ -89,7 +90,7 @@ describe('ShareSend', () => {
     expect(component.isOpen()).toBe(false);
   });
 
-  it('builds email, WhatsApp, and LinkedIn share URLs for the portfolio URL', async () => {
+  it('uses the configured production portfolio URL for all share actions', async () => {
     const fixture = TestBed.createComponent(ShareSend);
     const component = fixture.componentInstance;
     component.open();
@@ -97,8 +98,8 @@ describe('ShareSend', () => {
     await Promise.resolve();
     fixture.detectChanges();
 
-    const url = component.portfolioUrl();
-    expect(url).toMatch(/^https?:\/\//);
+    const expectedUrl = SITE_CONFIG.publicUrl;
+    expect(component.portfolioUrl()).toBe(expectedUrl);
 
     const root = fixture.nativeElement as HTMLElement;
     const email = root.querySelector(
@@ -111,12 +112,19 @@ describe('ShareSend', () => {
       'a[aria-label="Share portfolio on LinkedIn"]'
     ) as HTMLAnchorElement;
 
-    expect(email.getAttribute('href')).toBe(buildEmailShareUrl(url!));
-    expect(whatsapp.getAttribute('href')).toBe(buildWhatsAppShareUrl(url!));
-    expect(linkedin.getAttribute('href')).toBe(buildLinkedInShareUrl(url!));
+    expect(email.getAttribute('href')).toBe(buildEmailShareUrl(expectedUrl));
+    expect(whatsapp.getAttribute('href')).toBe(
+      buildWhatsAppShareUrl(expectedUrl)
+    );
+    expect(linkedin.getAttribute('href')).toBe(
+      buildLinkedInShareUrl(expectedUrl)
+    );
+    expect(root.querySelector('.share-url')?.textContent?.trim()).toBe(
+      expectedUrl
+    );
   });
 
-  it('generates a QR code using the portfolio URL', async () => {
+  it('keeps the QR code in the dialog and out of the email share link', async () => {
     const fixture = TestBed.createComponent(ShareSend);
     const component = fixture.componentInstance;
     component.open();
@@ -125,15 +133,49 @@ describe('ShareSend', () => {
     await Promise.resolve();
     fixture.detectChanges();
 
-    const url = component.portfolioUrl();
-    expect(url).toBeTruthy();
+    const expectedUrl = SITE_CONFIG.publicUrl;
     expect(QRCode.toString).toHaveBeenCalledWith(
-      url,
+      expectedUrl,
       expect.objectContaining({ type: 'svg' })
     );
     expect(
       fixture.nativeElement.querySelector('.share-qr[role="img"]')
     ).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain(
+      'Scan this code from the screen'
+    );
+
+    const email = fixture.nativeElement.querySelector(
+      'a[aria-label="Share portfolio by email"]'
+    ) as HTMLAnchorElement;
+    const decoded = decodeURIComponent(email.getAttribute('href') ?? '');
+    expect(decoded).toContain(expectedUrl);
+    expect(decoded).not.toMatch(/data:image|cid:|attachment/i);
+  });
+
+  it('copies the portfolio link to the clipboard', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    });
+
+    const fixture = TestBed.createComponent(ShareSend);
+    const component = fixture.componentInstance;
+    component.open();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const copyButton = fixture.nativeElement.querySelector(
+      'button[aria-label="Copy portfolio link"]'
+    ) as HTMLButtonElement;
+
+    expect(copyButton.textContent?.trim()).toBe('Copy Link');
+    copyButton.click();
+    await fixture.whenStable();
+
+    expect(writeText).toHaveBeenCalledWith(SITE_CONFIG.publicUrl);
+    expect(component.copyFeedback()).toBe('Copied');
   });
 
   it('shows an unavailable state when the portfolio URL is missing', async () => {

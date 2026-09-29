@@ -51,10 +51,10 @@
               <button
                 type="button"
                 class="share-copy"
-                [attr.aria-label]="'Copy portfolio URL'"
+                aria-label="Copy portfolio link"
                 (click)="copyUrl()"
               >
-                Copy
+                Copy Link
               </button>
             </div>
 
@@ -109,6 +109,10 @@
             <h3 id="share-qr-label" class="share-section-label">
               Portfolio QR code
             </h3>
+
+            <p class="share-qr-hint">
+              Scan this code from the screen to open the portfolio.
+            </p>
 
             @if (qrSvg()) {
               <div
