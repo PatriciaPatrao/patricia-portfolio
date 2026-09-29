@@ -90,12 +90,28 @@
   .description {
     max-width: 650px;
     margin: var(--space-lg) 0 0;
-  
+
     color: var(--color-text-secondary);
     font-size: 0.95rem;
     line-height: 1.8;
+    text-align: justify;
   }
-  
+
+  .highlights {
+    max-width: 650px;
+    margin: var(--space-md) 0 0;
+    padding-left: 1.25rem;
+
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: justify;
+  }
+
+  .highlights li + li {
+    margin-top: 0.35rem;
+  }
+
   .technologies {
     display: flex;
     flex-wrap: wrap;

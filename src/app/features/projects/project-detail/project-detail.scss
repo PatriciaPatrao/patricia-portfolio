@@ -100,13 +100,6 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-.project-body {
-  display: grid;
-  gap: 0;
-
-  margin-top: 0;
-}
-
 .project-section {
   display: grid;
   grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
@@ -116,7 +109,6 @@ h1 {
   padding: var(--space-2xl) 0;
 
   border-top: 1px solid var(--color-border);
-  background: transparent;
 }
 
 .section-label {
@@ -170,7 +162,6 @@ h1 {
 .challenge-block h2 {
   margin: 0 0 0.5rem;
 
-  color: var(--color-text);
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -197,13 +188,6 @@ h1 {
   list-style: none;
 }
 
-.workflow-list {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-}
-
 .contribution-list li,
 .workflow-item {
   display: grid;
@@ -218,7 +202,6 @@ h1 {
 
   background: var(--color-inset);
 
-  color: var(--color-text);
   font-size: 0.95rem;
   line-height: 1.6;
   text-align: justify;
@@ -346,10 +329,8 @@ h1 {
 }
 
 .nav-name {
-  color: var(--color-text);
   font-size: 1.05rem;
   font-weight: 600;
-  overflow-wrap: break-word;
 }
 
 .nav-card:hover .nav-direction,
