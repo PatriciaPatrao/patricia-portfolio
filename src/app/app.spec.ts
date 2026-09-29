@@ -18,12 +18,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the navbar brand and router outlet', async () => {
+  it('should render the navbar brand, router outlet, and share action', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.logo')?.textContent).toContain('PATRÍCIA');
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('app-share-send')).toBeTruthy();
+    expect(compiled.textContent).toContain('SHARE / SEND');
   });
 
   it('should set the viewport scroll offset for anchor navigation', () => {

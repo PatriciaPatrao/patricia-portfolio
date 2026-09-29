@@ -3,10 +3,11 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './core/theme/theme.service';
 import { Navbar } from './shared/components/navbar/navbar';
+import { ShareSend } from './shared/components/share-send/share-send';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar],
+  imports: [RouterOutlet, Navbar, ShareSend],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
