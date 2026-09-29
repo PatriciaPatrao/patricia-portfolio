@@ -6,6 +6,7 @@ interface ExperienceItem {
   period: string;
   location?: string;
   description: string;
+  highlights?: string[];
   technologies: string[];
 }
 
@@ -43,24 +44,52 @@ export class Experience {
     },
     {
       company: 'Recipharm',
-      role: 'Microbiology Analyst / Team Leader',
-      period: 'Previous experience',
+      role: 'Team Leader',
+      period: 'Feb 2020 — Oct 2023',
       location: 'Portugal',
       description:
-        'Worked in a regulated pharmaceutical environment, combining technical laboratory work with team coordination, data management and quality-focused processes. Developed experience in GMP/GLP environments, audits, data integrity and stakeholder communication.',
+        'Led laboratory and quality-related teams in a regulated pharmaceutical environment, coordinating complex activities across stakeholders, clients and validation work while using operational and analytical data to support quality management and continuous improvement.',
+      highlights: [
+        'Led cross-functional teams and coordinated complex activities across laboratory and quality-related processes.',
+        'Worked directly with clients to support product validation activities, requirements clarification and the delivery of validation-related work.',
+        'Organised and conducted internal audits, requiring detailed knowledge of the data generated for each client, its traceability, quality requirements and associated processes.',
+        'Reviewed and interpreted operational and analytical data to identify inconsistencies, risks, deviations and opportunities for improvement.',
+        'Used a structured, data-driven approach to problem-solving, process optimisation and quality management.',
+        'Coordinated activities across multiple stakeholders, strengthening stakeholder management, communication and collaborative problem-solving skills.',
+        'Supported continuous improvement initiatives using evidence from operational and analytical data.',
+      ],
       technologies: [
-        'GMP / GLP',
-        'Data Integrity',
-        'Data Management',
+        'Stakeholder Management',
+        'Client Communication',
+        'Validation',
+        'Audits',
+        'Data Review',
+        'Process Optimisation',
+        'Quality Management',
+      ]
+    },
+    {
+      company: 'Recipharm',
+      role: 'Microbiology Analyst',
+      period: 'Nov 2017 — Feb 2020',
+      location: 'Portugal',
+      description:
+        'Performed pharmaceutical laboratory analyses in a highly regulated environment, managing and reviewing laboratory data with close attention to data quality, integrity, traceability and accurate interpretation of results.',
+      highlights: [
+        'Performed analyses of pharmaceutical products, raw materials and materials according to applicable laboratory procedures and quality requirements.',
+        'Managed, analysed and reviewed laboratory data, with particular attention to data quality, traceability and integrity.',
+        'Applied ALCOA principles to ensure data integrity, accuracy, completeness, consistency and traceability of reported results.',
+        'Analysed and processed environmental monitoring data from manufacturing environments, identifying relevant patterns, deviations and data quality issues.',
+        'Prepared and reviewed analytical results and associated documentation for reporting and quality processes.',
+        'Worked in a highly regulated environment where accurate data interpretation, documentation and compliance were critical.',
+      ],
+      technologies: [
         'Data Analysis',
-        'Data Visualization',
-        'Data Reporting',
-        'Data Governance',
-        'Data Compliance',
+        'Data Quality',
+        'Data Integrity',
+        'Data Traceability',
+        'ALCOA',
         'Quality',
-        'Team Leadership',
-        'EDA',
-        'Excel'
       ]
     }
   ];
