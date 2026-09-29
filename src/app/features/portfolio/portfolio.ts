@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
+import { PageMetaService } from '../../core/seo/page-meta.service';
 import { Home } from '../home/home';
 import { About } from '../about/about';
 import { Experience } from '../experience/experience';
@@ -14,5 +15,10 @@ import { Footer } from '../../shared/components/footer/footer';
   templateUrl: './portfolio.html',
   styleUrl: './portfolio.scss'
 })
+export class Portfolio implements OnInit {
+  private readonly pageMeta = inject(PageMetaService);
 
-export class Portfolio {}
+  ngOnInit(): void {
+    this.pageMeta.setDefault();
+  }
+}

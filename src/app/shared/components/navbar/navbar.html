@@ -1,28 +1,30 @@
-<nav class="navbar">
-  <div class="navbar-inner">
-    <a class="logo" href="/">
-      PATRÍCIA
-    </a>
+<header>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="logo" href="/">
+        PATRÍCIA
+      </a>
 
-    <div class="nav-controls">
-      <div class="nav-links">
-        <a routerLink="/">HOME</a>
-        <a routerLink="/" fragment="about">ABOUT</a>
-        <a routerLink="/" fragment="experience">EXPERIENCE</a>
-        <a routerLink="/" fragment="projects">PROJECTS</a>
-        <a routerLink="/" fragment="skills">SKILLS</a>
-        <a routerLink="/" fragment="contact">CONTACT</a>
+      <div class="nav-controls">
+        <div class="nav-links">
+          <a routerLink="/" (click)="onHomeClick()">HOME</a>
+          <a routerLink="/" fragment="about">ABOUT</a>
+          <a routerLink="/" fragment="experience">EXPERIENCE</a>
+          <a routerLink="/" fragment="projects">PROJECTS</a>
+          <a routerLink="/" fragment="skills">SKILLS</a>
+          <a routerLink="/" fragment="contact">CONTACT</a>
+        </div>
+
+        <button
+          type="button"
+          class="theme-toggle"
+          [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+          [attr.aria-pressed]="theme() === 'light'"
+          (click)="toggleTheme()"
+        >
+          {{ theme() === 'dark' ? 'Dark' : 'Light' }}
+        </button>
       </div>
-
-      <button
-        type="button"
-        class="theme-toggle"
-        [attr.aria-label]="theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-        [attr.aria-pressed]="theme() === 'light'"
-        (click)="toggleTheme()"
-      >
-        {{ theme() === 'dark' ? 'Dark' : 'Light' }}
-      </button>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

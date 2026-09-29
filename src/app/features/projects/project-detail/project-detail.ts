@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ViewportScroller } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
+import { PageMetaService } from '../../../core/seo/page-meta.service';
 import { ProjectItem, PROJECTS } from '../project-data';
 
 @Component({
@@ -14,6 +15,7 @@ import { ProjectItem, PROJECTS } from '../project-data';
 export class ProjectDetail {
   private route = inject(ActivatedRoute);
   private viewportScroller = inject(ViewportScroller);
+  private pageMeta = inject(PageMetaService);
 
   project: ProjectItem | undefined;
   previousProject: ProjectItem | undefined;
@@ -39,6 +41,7 @@ export class ProjectDetail {
       this.previousProject = undefined;
       this.nextProject = undefined;
       this.displayTechnologies = [];
+      this.pageMeta.setNotFound();
       return;
     }
 
@@ -47,5 +50,9 @@ export class ProjectDetail {
     this.nextProject = PROJECTS[index + 1];
     this.displayTechnologies =
       this.project.stack ?? this.project.technologies;
+    this.pageMeta.set(
+      `${this.project.name} | Patrícia Patrão de Carvalho`,
+      this.project.shortDescription
+    );
   }
 }
