@@ -1,0 +1,203 @@
+@if (project) {
+  <main class="project-detail">
+    <a
+      class="back-link"
+      routerLink="/"
+      fragment="projects"
+    >
+      <span aria-hidden="true">←</span>
+      BACK TO PROJECTS
+    </a>
+
+    <header class="project-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">{{ project.category }}</p>
+
+        <h1>{{ project.name }}</h1>
+
+        <p class="lead">
+          {{ project.shortDescription }}
+        </p>
+
+      </div>
+
+      <aside class="hero-panel">
+        <div>
+          <p class="hero-panel-label">ROLE</p>
+          <p class="hero-panel-value">{{ project.role }}</p>
+        </div>
+
+        @if (project.stack) {
+          <div>
+            <p class="hero-panel-label">CORE STACK</p>
+            <div class="technologies">
+              @for (technology of project.technologies; track technology) {
+                <span class="technology">
+                  {{ technology }}
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </aside>
+    </header>
+
+    <div class="project-body">
+      <section class="project-section">
+        <p class="section-label">OVERVIEW</p>
+        <p class="section-copy">
+          {{ project.description }}
+        </p>
+      </section>
+
+      @if (project.roleSummary) {
+        <section class="project-section">
+          <p class="section-label">MY ROLE</p>
+          <p class="section-copy">
+            {{ project.roleSummary }}
+          </p>
+        </section>
+      }
+
+      @if (project.contributionGroups?.length) {
+        <section class="project-section">
+          <p class="section-label">KEY CONTRIBUTIONS</p>
+
+          <div class="info-grid">
+            @for (group of project.contributionGroups; track group.title) {
+              <article class="info-card">
+                <h2>{{ group.title }}</h2>
+                <p>{{ group.description }}</p>
+              </article>
+            }
+          </div>
+        </section>
+      } @else {
+        <section class="project-section">
+          <p class="section-label">MY CONTRIBUTION</p>
+
+          <ol class="contribution-list">
+            @for (contribution of project.contributions; track contribution; let i = $index) {
+              <li>
+                <span class="contribution-index">
+                  {{ contributionIndex(i) }}
+                </span>
+                <span>{{ contribution }}</span>
+              </li>
+            }
+          </ol>
+        </section>
+      }
+
+      @if (project.implementation?.length) {
+        <section class="project-section">
+          <p class="section-label">TECHNICAL IMPLEMENTATION</p>
+
+          <div class="copy-stack">
+            @for (paragraph of project.implementation; track paragraph) {
+              <p class="section-copy">
+                {{ paragraph }}
+              </p>
+            }
+          </div>
+        </section>
+      }
+
+      @if (project.workflows?.length) {
+        <section class="project-section">
+          <p class="section-label">USER-FACING WORKFLOWS</p>
+
+          <div class="workflow-list">
+            @for (workflow of project.workflows; track workflow.title; let i = $index) {
+              <article class="workflow-item">
+                <span class="contribution-index">
+                  {{ contributionIndex(i) }}
+                </span>
+                <div>
+                  <h2>{{ workflow.title }}</h2>
+                  <p>{{ workflow.description }}</p>
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
+      @if (project.challenge) {
+        <section class="project-section">
+          <p class="section-label">CHALLENGE &amp; SOLUTION</p>
+
+          <div class="challenge-block">
+            <div>
+              <h2>Challenge</h2>
+              <p class="section-copy">
+                {{ project.challenge.problem }}
+              </p>
+            </div>
+
+            <div>
+              <h2>Solution</h2>
+              <ul class="solution-list">
+                @for (point of project.challenge.response; track point) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+        </section>
+      }
+
+      <section class="project-section">
+        <p class="section-label">TECHNOLOGIES</p>
+
+        <div class="technologies">
+          @for (technology of displayTechnologies; track technology) {
+            <span class="technology">
+              {{ technology }}
+            </span>
+          }
+        </div>
+      </section>
+    </div>
+
+    <nav class="project-nav" aria-label="Other projects">
+      @if (previousProject) {
+        <a
+          class="nav-card"
+          [routerLink]="['/projects', previousProject.slug]"
+        >
+          <span class="nav-direction">← PREVIOUS</span>
+          <span class="nav-name">{{ previousProject.name }}</span>
+        </a>
+      } @else {
+        <span class="nav-card nav-card-empty"></span>
+      }
+
+      @if (nextProject) {
+        <a
+          class="nav-card nav-card-next"
+          [routerLink]="['/projects', nextProject.slug]"
+        >
+          <span class="nav-direction">NEXT →</span>
+          <span class="nav-name">{{ nextProject.name }}</span>
+        </a>
+      }
+    </nav>
+  </main>
+} @else {
+  <main class="project-not-found">
+    <p class="eyebrow">PROJECTS</p>
+    <h1>Project not found</h1>
+    <p class="lead">
+      This project does not exist or is no longer available.
+    </p>
+    <a
+      class="back-link"
+      routerLink="/"
+      fragment="projects"
+    >
+      <span aria-hidden="true">←</span>
+      BACK TO PROJECTS
+    </a>
+  </main>
+}

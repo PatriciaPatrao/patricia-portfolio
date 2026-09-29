@@ -1,0 +1,55 @@
+<section class="experience" id="experience">
+    <div class="experience-content">
+  
+      <div class="section-heading">
+        <p class="eyebrow">EXPERIENCE</p>
+  
+        <h2>
+          From scientific environments to software development.
+        </h2>
+      </div>
+  
+      <div class="experience-list">
+  
+        @for (experience of experiences; track experience.company) {
+          <article class="experience-item">
+  
+            <div class="experience-meta">
+              <span class="period">
+                {{ experience.period }}
+              </span>
+  
+              @if (experience.location) {
+                <span class="location">
+                  {{ experience.location }}
+                </span>
+              }
+            </div>
+  
+            <div class="experience-details">
+              <h3>{{ experience.role }}</h3>
+  
+              <p class="company">
+                {{ experience.company }}
+              </p>
+  
+              <p class="description">
+                {{ experience.description }}
+              </p>
+  
+              <div class="technologies">
+                @for (technology of experience.technologies; track technology) {
+                  <span class="technology">
+                    {{ technology }}
+                  </span>
+                }
+              </div>
+            </div>
+  
+          </article>
+        }
+  
+      </div>
+  
+    </div>
+  </section>

@@ -1,0 +1,56 @@
+<section class="projects" id="projects">
+  <div class="projects-content">
+
+    <div class="section-heading">
+      <p class="eyebrow">PROJECTS</p>
+
+      <h2>
+        Software built around real-world problems.
+      </h2>
+    </div>
+
+    <div class="projects-grid">
+
+      @for (project of projects; track project.slug) {
+        <a
+          class="project-card"
+          [routerLink]="['/projects', project.slug]"
+          [attr.aria-label]="'View project ' + project.name"
+        >
+          <div class="project-header">
+            <span class="project-category">
+              {{ project.category }}
+            </span>
+
+            <span class="project-index">
+              {{ cardIndex($index) }}
+            </span>
+          </div>
+
+          <h3>{{ project.name }}</h3>
+
+          <p class="role">{{ project.role }}</p>
+
+          <p class="description">
+            {{ project.shortDescription }}
+          </p>
+
+          <div class="technologies">
+            @for (technology of project.technologies; track technology) {
+              <span class="technology">
+                {{ technology }}
+              </span>
+            }
+          </div>
+
+          <span class="project-link">
+            VIEW PROJECT
+            <span class="project-link-arrow" aria-hidden="true">→</span>
+          </span>
+        </a>
+      }
+
+    </div>
+
+  </div>
+</section>
