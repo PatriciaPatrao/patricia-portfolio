@@ -7,22 +7,44 @@
   right: max(1rem, env(safe-area-inset-right, 0px));
   bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   z-index: 900;
-  min-height: 44px;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid var(--color-border);
+  min-height: 48px;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--color-accent);
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text-secondary);
-  box-shadow: var(--shadow-elevated);
-  font-size: 0.7rem;
-  font-weight: 600;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 10px 28px rgba(74, 168, 216, 0.35);
+  font-size: 0.75rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .share-trigger:hover,
-.share-trigger:focus-visible,
+.share-trigger:focus-visible {
+  background: var(--color-accent-secondary);
+  border-color: var(--color-accent-secondary);
+  color: var(--color-on-accent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.22),
+    0 14px 32px rgba(74, 168, 216, 0.42);
+}
+
+.share-trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 .share-close:hover,
 .share-close:focus-visible,
 .share-copy:hover,
@@ -33,7 +55,6 @@
   border-color: var(--color-border-accent);
 }
 
-.share-trigger:focus-visible,
 .share-close:focus-visible,
 .share-copy:focus-visible,
 .share-action:focus-visible {
