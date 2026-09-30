@@ -17,6 +17,8 @@ describe('Experience', () => {
 
     expect(text).toContain('Software Developer — R&D / Innovation');
     expect(text).toContain('ISQ');
+    expect(text).toContain('Research, Development and Innovation department');
+    expect(text).toContain('OpenAI APIs and Hugging Face');
     expect(text).toContain('Team Leader');
     expect(text).toContain('Microbiology Analyst');
     expect(text).toContain('Recipharm');
