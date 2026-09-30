@@ -23,7 +23,18 @@ export class Experience {
       period: 'Nov 2023 — Present',
       location: 'Lisbon, Portugal',
       description:
-        'Developing digital solutions for R&D and innovation projects, working across frontend applications, backend APIs, data integration and database-driven features. Collaborating with stakeholders to understand requirements, analyse data and deliver software solutions.',
+        'Developing and maintaining web applications for research, development and innovation projects, across frontend interfaces, REST APIs, authentication, data integration and database-driven features.',
+      highlights: [
+        'Develop and maintain software solutions in the Research, Development and Innovation department, working across frontend development, API integration and backend support.',
+        'Build responsive, reusable interfaces with Angular, TypeScript, RxJS and NgRx, with attention to component architecture and user-oriented screens.',
+        'Design, develop and integrate REST APIs with Python, Flask and FastAPI, connecting frontend applications to backend services and data sources.',
+        'Work with SQL and NoSQL databases, including PostgreSQL, MySQL and MongoDB, to support data-intensive applications and backend functionality.',
+        'Implement authentication and authorisation with OAuth2, and contribute to asynchronous workflows that connect the frontend, the backend and external services.',
+        'Apply Clean Code and Clean Architecture in delivery work, including unit testing with Pytest, refactoring and incremental modernisation of existing applications.',
+        'Use Git, Docker, Docker Compose and CI/CD in development workflows, and work with cloud environments on AWS and Google Cloud.',
+        'Contribute to AI and generative AI initiatives with OpenAI APIs and Hugging Face across R&D projects.',
+        'Use Figma to refine layouts, responsive behaviour and user flows, collaborating on the technical and experience sides of the software.',
+      ],
       technologies: [
         'Angular',
         'REST APIs',
